@@ -1,0 +1,21 @@
+#root{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*code */
+
+.backButton{
+    position: absolute;
+    z-index: 2;
+    top: 2%;
+    left: 2%;
+    height: 4.5vw;
+    width: 4.5vw;
+    opacity: .5;
+    transition: all .5s;
+}
+.backButton:hover, .backButton:focus{
+    opacity: 1;
+}
