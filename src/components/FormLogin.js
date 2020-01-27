@@ -54,10 +54,23 @@ const FormLogin = ({onSubmit}) => {
         <form onSubmit={handleSubmit}>
             <h1 className="loginTitle">Login</h1>
 
-            <label htmlFor="userName">Usuário</label>
-            <input type="text" name="userName" id="userName" value={usuario} onChange={e => setUsuario(e.target.value)} placeholder="Digite seu nome de usuário ou email"/>
+            <label htmlFor="userName">
+                Usuário
+            </label>
+
+            <input 
+                type="text" 
+                name="userName" 
+                id="userName" 
+                value={usuario} 
+                onChange={e => setUsuario(e.target.value)} 
+                placeholder="Digite seu nome de usuário ou email"
+            />
             
-            <label htmlFor="senha">Senha</label>
+            <label htmlFor="senha">
+                Senha
+            </label>
+
             <input type="password" name="senha" id="senha" value={senha} onChange={e => setSenha(e.target.value)} placeholder="Digite sua senha"/>
 
             <button type="submit" className="loginButton">Logar</button>

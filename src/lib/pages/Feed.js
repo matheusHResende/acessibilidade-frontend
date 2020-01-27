@@ -1,9 +1,15 @@
 import React from 'react';
 
-const Feed = (e) => {
-    console.log(e)
+const Feed = () => {
+    const dados = JSON.parse(localStorage.getItem('dados'));
     return (
-        <h1>Hello,</h1>
+        <ul>
+            <li>id:{dados.id}</li>
+            <li>nome:{dados.nome}</li>
+            <li>nome:{dados.email}</li>
+            <li>nome:{dados.usuario}</li>
+            <li>nome:{dados.id_tipo_usuario}</li>
+        </ul>
     )
 }
 
