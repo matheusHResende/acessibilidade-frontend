@@ -1,9 +1,10 @@
 import React from 'react';
 
-
-const Feed = ({history}) => {
-    console.log()
-return <h1>Hello</h1>
+const Feed = (e) => {
+    console.log(e)
+    return (
+        <h1>Hello,</h1>
+    )
 }
 
 export default Feed;

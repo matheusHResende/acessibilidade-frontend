@@ -16,7 +16,7 @@ export default function Routes(){
                 <Route exact path="/" component={Index}/>
                 <Route exact path="/login" component={Login}/>
                 <Route exact path="/cadastrar" component={Cadastro}/>
-                <PrivateRoute exact path="/feed" component={Feed} />
+                <PrivateRoute exact path="/feed" component={Feed}/>
                 <Route component={NotFound}/>
             </Switch>
         </BrowserRouter>

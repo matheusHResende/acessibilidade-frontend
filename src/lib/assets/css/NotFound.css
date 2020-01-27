@@ -1,0 +1,14 @@
+h1{
+    font-size: 5vw;
+}
+.button{
+    width: 20vh;
+    height: 20vh;
+    opacity: .5;
+    transition: all .8s;
+    margin-top: 5%;
+}
+
+.button:hover, .button:focus{
+    opacity: 1;
+}

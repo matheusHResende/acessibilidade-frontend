@@ -105,7 +105,7 @@ form input:focus{
     opacity: 1;
 }
 
-.alertEmptyUser, .alertEmptyPassword, .alertEmptyBoth, .alertAPI{
+.alertEmptyUser, .alertEmptyPassword, .alertEmptyBoth{
     width: 55%;
     padding: 1vw;
     border-radius: 20px;
