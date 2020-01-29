@@ -14,6 +14,10 @@ form{
     border: 0;
     width: 65%;
     max-width: 1000px;
+    box-shadow: 2px 2px 15px rgba(0,0,0,.2);
+    border-radius: 10px;
+    padding: 40px 20px;
+    border-color: #333;
 }
 
 form .loginTitle{
@@ -44,9 +48,7 @@ form input{
     transition: all .6s;
 }
 
-form input::placeholder{
-    font-size: 1.6vw;
-}
+form input::placeholder{ font-size: 1.6vw; }
 
 form input:focus{
     border: 2px solid #638bb3;
@@ -87,9 +89,7 @@ form input:focus{
     font-weight: 700;
 }
 
-.cadastroButton a:hover, .cadastroButton a:focus{
-    color: #638bb3;
-}
+.cadastroButton a:hover, .cadastroButton a:focus{ color: #638bb3; }
 
 .backButton{
     position: absolute;
@@ -101,9 +101,7 @@ form input:focus{
     opacity: .5;
     transition: all .5s;
 }
-.backButton:hover, .backButton:focus{
-    opacity: 1;
-}
+.backButton:hover, .backButton:focus{ opacity: 1; }
 
 .alertEmptyUser, .alertEmptyPassword, .alertEmptyBoth{
     width: 55%;

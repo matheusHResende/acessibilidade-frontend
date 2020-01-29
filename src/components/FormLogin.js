@@ -73,7 +73,7 @@ const FormLogin = ({onSubmit}) => {
 
             <input type="password" name="senha" id="senha" value={senha} onChange={e => setSenha(e.target.value)} placeholder="Digite sua senha"/>
 
-            <button type="submit" className="loginButton">Logar</button>
+            <button type="submit" className="loginButton">Entrar</button>
             <p className="cadastroButton">Ainda não tem uma conta? <Link to="/cadastrar">Clique aqui!</Link></p>
         </form>
         <Link to="/" className="backButton"><img src={arrowBack} alt="Botão para voltar" tabIndex="0"/></Link>
