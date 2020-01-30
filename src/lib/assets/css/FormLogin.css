@@ -6,6 +6,7 @@
 }
 
 form{
+    background: #eee;
     display: flex;
     flex-direction: column;
     justify-content: center;

@@ -1,27 +1,51 @@
 import React,{useState} from 'react';
 
 import '../assets/css/PageCadastro.css'
-import Comp0 from '../../components/Teste';
-import Comp1 from '../../components/Teste2';
+import SelectUser from '../../components/SelectUser';
+import StepBar from '../../components/StepBar';
 
 const Cadastro = () =>{
-    const [counter = 0, setCounter] = useState(0);
+    const [counter, setCounter] = useState(0);
+    const [num, setNum] = useState(0);
     
-    function addCounter() {
-        setCounter(counter + 1);
+    async function changeComponent(id){
+        console.log(id)
+        // switch(counter){
+        //     case 0:
+        //         setCounter(1);
+        //         setCounter(1);
+        //         break;
+        //     case 1:
+        //         setCounter(2);
+        //         setCounter(2);
+        //         break;
+        //     case 2:
+        //         setCounter(3);
+        //         setNum(3);
+        //         break;
+        //     case 3:
+        //         setCounter(4);
+        //         setNum(4);
+        //         break;
+        //         default:
+        //             setCounter(0);
+        //             setNum(0);
+        // }
     }
 
-    function removeCounter() {
-        setCounter(counter - 1);
+    function showComponent(){
+        switch(counter){
+            case 0 :
+                return <SelectUser onClick={changeComponent}/>
+            default:
+                return <h1>hello World</h1>
+        }
     }
 
-
-        return(
+    return(
         <>
-            <button onClick={addCounter}>1</button>
-            <button onClick={removeCounter}>2</button>
-            <br/><br/><br/><br/>
-            {(counter === 0)? <Comp0 /> : <Comp1 />}
+        <StepBar num={num}/>
+        {showComponent()}
         </>
     )
 }

@@ -51,7 +51,7 @@ const FormLogin = ({onSubmit}) => {
         <div className="alertEmptyPassword" id="alertEmptyPassword">Senha incorreta</div>
         <div className="alertEmptyBoth" id="alertEmptyBoth">Usuário/Senha incorretos</div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} >
             <h1 className="loginTitle">Login</h1>
 
             <label htmlFor="userName">
