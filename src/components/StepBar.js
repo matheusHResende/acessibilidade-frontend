@@ -12,12 +12,18 @@ const StepBar = ({num}) => {
             document.getElementById("list-item-1").classList.add('active')
         break;
         case 2:
+            document.getElementById("list-item-1").classList.add('active')
             document.getElementById("list-item-2").classList.add('active')
         break;
         case 3:
+            document.getElementById("list-item-1").classList.add('active')
+            document.getElementById("list-item-2").classList.add('active')
             document.getElementById("list-item-3").classList.add('active')
         break;
         case 4:
+            document.getElementById("list-item-1").classList.add('active')
+            document.getElementById("list-item-2").classList.add('active')
+            document.getElementById("list-item-3").classList.add('active')
             document.getElementById("list-item-4").classList.add('active')
         break;
         default: 
