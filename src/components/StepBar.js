@@ -4,7 +4,6 @@ import '../lib/assets/css/StepBar.css';
 
 const StepBar = ({num}) => {
     const [progress, setProgress] = useState(0);
-    console.log(num)
     useEffect(() => setProgress(num),[num]);
 
     switch(progress){
@@ -32,10 +31,10 @@ const StepBar = ({num}) => {
     return(
     <div className="container">
         <ul className="progressbar">
-            <li className="list-item" id="list-item-1">Tipo de usuário</li>
-            <li className="list-item" id="list-item-2">Informações básicas</li>
-            <li className="list-item" id="list-item-3">informações pessoais</li>
-            <li className="list-item" id="list-item-4">informações regionais</li>
+            <li className="list-item" id="list-item-1" />
+            <li className="list-item" id="list-item-2" />
+            <li className="list-item" id="list-item-3" />
+            <li className="list-item" id="list-item-4" />
         </ul>
     </div>
     )
