@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import {getVagasEmpresa} from '../../requests/request';
+import ListAllMyJobs from '../../requests/Empresa/ListAllMyJobs';
 import '../assets/css/ListJobsEmpresa.css';
 
 
 const ListJobsActiveEmpresa = (props) => {
     const idEmpresa = props.id;
+
     const [myJobs, setMyJobs] = useState([]);
 
     useEffect(()=>{
-        getVagasEmpresa(idEmpresa,(res) => {
+        ListAllMyJobs(idEmpresa,(res) => {
             const newResponse = res.filter(function (el){
                 return el.ativo == true;
             });
@@ -27,7 +28,6 @@ const ListJobsActiveEmpresa = (props) => {
                             <label htmlFor="desc" className="empresa-opportunities-desc">Localidade: {myJobs.Endereco.cidade} - {myJobs.Endereco.estado} </label>
                             <button className="btn-finish">Finalizar</button>
                             <button className="btn-change">Alterar</button>
-                            <button className="btn-delete">Deletar</button>
                         </li>
                     )
                 })

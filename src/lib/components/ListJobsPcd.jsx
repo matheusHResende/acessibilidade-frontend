@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {getVagas} from '../../requests/request';
+import ListAllJobs from '../../requests/Pcd/ListAllJobs';
 import '../assets/css/ListJobsPcd.css';
 
 
@@ -9,8 +9,7 @@ const ListJobsPcd = (props) => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(()=>{
-        // loadJobs();
-        getVagas(idVaga,(res) => {
+        ListAllJobs(idVaga,(res) => {
             // checa se a vaga é do tipo ativo, caso seja, armazena
             const newResponse = res.filter(function (el){
                 return el.ativo == true;
@@ -18,6 +17,7 @@ const ListJobsPcd = (props) => {
             setJobs([...newResponse]);
         })
     }, []);
+
 
     return(
         <div className="pcd-jobs-content">
