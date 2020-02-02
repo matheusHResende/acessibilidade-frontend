@@ -28,6 +28,16 @@
     cursor: pointer;
 }
 
+.card:hover,
+.card:focus{
+    opacity: .8;
+}
+
+.title{
+    position: absolute;
+    top: 10px;
+}
+
 @media screen and (max-width: 1000px) {
     .main-box{
         flex-direction: column;

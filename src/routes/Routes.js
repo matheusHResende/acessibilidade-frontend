@@ -3,11 +3,11 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 import PrivateRoute from '../components/PrivateRoute';
 
-import Index from '../lib/pages/Index';
-import Login from '../lib/pages/Login';
-import Cadastro from '../lib/pages/Cadastro';
-import Feed from '../lib/pages/Feed';
-import NotFound from '../components/NotFound';
+import Index from '../lib/pages/Index.jsx';
+import Login from '../lib/pages/Login.jsx';
+import Cadastro from '../lib/pages/Cadastro.jsx';
+import Feed from '../lib/pages/Feed.jsx';
+import NotFound from '../components/NotFound.jsx';
 
 export default function Routes(){
     return (
