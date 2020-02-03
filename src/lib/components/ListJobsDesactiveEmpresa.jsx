@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import ListAllMyJobs from '../../requests/Empresa/ListAllMyJobs';
+import ListAllMyJobs from '../../requests/company/ListAllMyJobs';
 import '../assets/css/ListJobsEmpresa.css';
 
 
 const ListJobsDesactiveEmpresa = (props) => {
-    const idEmpresa = props.id;
+    const idCompany = props.props.id;
     const [myJobs, setMyJobs] = useState([]);
 
     useEffect(()=>{
-        ListAllMyJobs(idEmpresa,(res) => {
-            const newResponse = res.filter(function (el){
-                return el.ativo == false;
-            });
-            setMyJobs([...newResponse]);
-        })
+        const response = await ListAllMyJobs(idCompany);
+        
+        const newResponse = response.filter(function (el){
+            return el.ativo == false;
+        });
+        setMyJobs([...newResponse]);
     }, []);
 
     return ( 

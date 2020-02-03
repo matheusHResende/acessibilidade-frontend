@@ -1,8 +1,9 @@
 import api from '../../lib/assets/const/baseUrl';
 
 
-const ListAllJobs = (idJob = '') => {
-    api.get(`/vagas/${idJob}`)
+
+const ListAllMyJobs = async (idCompany) => {
+    await api.get(`/vagas/empresa/${idCompany}`)
     .then(response => {
         return response.json();
     })
@@ -10,8 +11,7 @@ const ListAllJobs = (idJob = '') => {
         return response.vagas
     })
     .catch(function(err) {
-        console.log('ERRO!')
+            console.log('ERRO!')
     });
 };
-
-export default ListAllJobs;
+export default ListAllMyJobs;

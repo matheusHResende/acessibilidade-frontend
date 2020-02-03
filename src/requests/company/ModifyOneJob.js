@@ -1,17 +1,13 @@
-import baseUrl from "../../lib/assets/const/baseUrl"
+import api from '../../lib/assets/const/baseUrl';
 
-const CreateOneJob  = (idEmpresa, body, callBackSuccess = () => {}) => {
-    return fetch(`${baseUrl}/vagas/`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: {
+
+const ModifyOneJob  = (idJob, body) => {
+    const NewJobsDetails = {
+        changes: {
             "vagas": {
+                "ativo":body.ativo,
                 "titulo":body.titulo,
                 "descricao":body.descricao,
-                "quantidade_vagas": body.quantidade_vagas,
-                "id_usuario_empresa":idEmpresa
             },
             "endereco":{
                 "pais":body.pais,
@@ -23,9 +19,9 @@ const CreateOneJob  = (idEmpresa, body, callBackSuccess = () => {}) => {
                 "numero": body.numero,
                 "complemento": body.complemento
             }
-        },
-        mode: "cors",
-    })
+        }
+    };
+    api.put(`/vagas/${idJob}`, NewJobsDetails.changes)
     .then(response => {
         const result = response.json();
         return console.log(result);
@@ -35,4 +31,4 @@ const CreateOneJob  = (idEmpresa, body, callBackSuccess = () => {}) => {
     });
 };
 
-export default CreateOneJob;
+export default ModifyOneJob;
