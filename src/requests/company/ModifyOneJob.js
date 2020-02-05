@@ -1,7 +1,7 @@
 import api from '../../lib/assets/const/baseUrl';
 
 
-const ModifyOneJob  = (idJob, body) => {
+const ModifyOneJob  = async (idJob, body) => {
     const NewJobsDetails = {
         changes: {
             "vagas": {
@@ -21,14 +21,12 @@ const ModifyOneJob  = (idJob, body) => {
             }
         }
     };
-    api.put(`/vagas/${idJob}`, NewJobsDetails.changes)
-    .then(response => {
-        const result = response.json();
-        return console.log(result);
-    })
-    .catch(function(err){
-        console.log(err);
-    });
+    const res = await api.put(`/vagas/${idJob}`, NewJobsDetails.changes)
+    try {
+        return console.log(res);
+    } catch (error) {
+        console.log(error);
+    };
 };
 
 export default ModifyOneJob;

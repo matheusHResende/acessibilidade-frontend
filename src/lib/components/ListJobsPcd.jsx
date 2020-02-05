@@ -9,15 +9,19 @@ const ListJobsPcd = (props) => {
     const [jobs, setJobs] = useState([]);
 
     useEffect(()=>{
+        handleJobs();
+    }, []);
+
+    async function handleJobs() {
         const response = await ListAllJobs(idJob);
-        
+        console.log(response);
         const newResponse = response.filter(function (el){
             return el.ativo == true;
         });
         setJobs([...newResponse]);
-    }, []);
+    };
 
-
+    console.log(jobs);
     return(
         <div className="pcd-jobs-content">
             <ul className="pcd-jobs-compiled">

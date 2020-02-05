@@ -1,7 +1,7 @@
 import api from '../../lib/assets/const/baseUrl';
 
 
-const CreateOneJob  = (idCompany, body) => {
+const CreateOneJob  = async (idCompany, body) => {
     const JobDetails = {
         job: {
             "vagas": {
@@ -22,14 +22,13 @@ const CreateOneJob  = (idCompany, body) => {
             }
         }
     };
-    api.post(`/vagas`, JobDetails.job)
-    .then(response => {
-        const result = response.json();
-        return console.log(result);
-    })
-    .catch(function(err){
+    const res = await api.post(`/vagas`, JobDetails.job)
+    try {
+        return console.log(res);
+    }
+    catch (err) {
         console.log(err);
-    });
+    };
 };
 
 export default CreateOneJob;

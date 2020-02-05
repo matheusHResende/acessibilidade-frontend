@@ -1,17 +1,14 @@
 import api from '../../lib/assets/const/baseUrl';
 
 
-const ListAllJobs = (idJob = '') => {
-    api.get(`/vagas/${idJob}`)
-    .then(response => {
-        return response.json();
-    })
-    .then(response => {
-        return response.vagas
-    })
-    .catch(function(err) {
-        console.log('ERRO!')
-    });
+const ListAllJobs = async (idJob = '') => {
+    const res = await api.get(`/vagas/${idJob}`);
+    try {
+        return res.data.vagas;
+    }
+    catch(err) {
+        console.log(err);
+    };
 };
 
 export default ListAllJobs;

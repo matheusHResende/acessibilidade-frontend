@@ -8,13 +8,17 @@ const ListJobsDesactiveEmpresa = (props) => {
     const [myJobs, setMyJobs] = useState([]);
 
     useEffect(()=>{
-        const response = await ListAllMyJobs(idCompany);
+        handleJobs();
+    }, []);
+
+    async function handleJobs() {
+        const response =  await ListAllMyJobs(idCompany);
         
         const newResponse = response.filter(function (el){
             return el.ativo == false;
         });
         setMyJobs([...newResponse]);
-    }, []);
+    };
 
     return ( 
         <div className="empresa-jobs-content">
