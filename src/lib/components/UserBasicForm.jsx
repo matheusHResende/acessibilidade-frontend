@@ -96,15 +96,19 @@ const UserBasic = ({ onSubmit, user_type, voltarComponent }) => {
     };
 
     function conferirEmail(e){
-        const setDisplay = document.getElementById('error');
-        if(e !== ''){
-            if(!ValidarEmail(e)){
-            return
+        let setDisplay = document.getElementById('error');
+
+        if(e.indexOf("@") !== -1){
+            if(ValidarEmail(e) === false){
+                setDisplay.style.display = "block";
+                setErro('Preencha seu email corretamente!')
+                document.querySelector('input[name="email"]').focus();
             }else{
-                setDisplay.style.display = "block"
-                setErro('Preencha o seu email corretamente!');
+                setErro('');
+                setDisplay.style.display = "none";
             }
         }
+        
     }
 
     return(

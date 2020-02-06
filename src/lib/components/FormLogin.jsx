@@ -63,16 +63,20 @@ const FormLogin = ({ history }) => {
         }
     }
 
-    function conferirEmail(email){
+    function conferirEmail(e){
         let errorDiv = document.querySelector('div.alert');
 
-        if(email.indexOf("@") !== -1){
-            if(!ValidarEmail(email)){
+        if(e.indexOf("@") !== -1){
+            if(ValidarEmail(e) === false){
                 errorDiv.style.display = "block";
                 setError('Preencha seu email corretamente!')
                 document.querySelector('input[name="userName"]').focus();
+            }else{
+                setError('');
+                errorDiv.style.display = "none";
             }
         }
+        
     }
 
     return(
@@ -91,7 +95,7 @@ const FormLogin = ({ history }) => {
                     value={usuario} 
                     onChange={e => setUsuario(e.target.value)} 
                     placeholder="Digite seu nome de usuário ou email"
-                    // onBlur={e => conferirEmail(e.target.value)}
+                    onBlur={e => conferirEmail(e.target.value)}
                 />
                 
                 <label htmlFor="senha">Senha</label>
