@@ -1,0 +1,16 @@
+import React from 'react';
+import { Redirect } from 'react-router-dom';
+
+import api from '../../lib/assets/const/api.js';
+import Authentication from '../../services/Authentication';
+
+export default async function RequestCadastroEmpresa(cadastroFinal){
+    const response = await api.post('/empresas', cadastroFinal);
+    console.log(response);
+
+    if(response.statusText === "Created"){
+        localStorage.setItem('key', response.data.token);
+        localStorage.setItem('dados', JSON.stringify(response.data.usuario));
+        return !Authentication()? <Redirect to={{pathname: '/feedempresa'}} /> : <Redirect to={{pathname: '/cadastro'}} />
+    }
+}
