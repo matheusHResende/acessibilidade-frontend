@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-import '../assets/css/AddressForm.css'
+import '../assets/css/AddressForm.css';
+import RequestEndereco from '../../requests/RequestEndereco/RequestEndereco';
 
 const LoginInfos = ({ onSubmit, voltarComponent }) => {
     useEffect(() => document.querySelector('input[name="pais"]').focus(), []);
@@ -51,12 +52,34 @@ const LoginInfos = ({ onSubmit, voltarComponent }) => {
         }
     }
 
+    async function cepReturn(cep){
+        const response = await RequestEndereco(cep);
+
+        if(response.status === 200){
+            setBairro(response.data.bairro);
+            setEstado(response.data.uf);
+            setPais('Brasil');
+            setCidade(response.data.localidade)
+        }
+    }
+
     return(
         <main>
             <form className="formAddress" onSubmit={enviarDados}>
                 <h1>Informações</h1>
 
                 <span className="error" id="error">{erro}</span>
+
+                <div className="form-group">
+                <label htmlFor="cep">CEP</label>
+                <input 
+                    type="number" 
+                    name="cep" 
+                    id="cep" 
+                    onChange={e => setCep(e.target.value)} 
+                    onBlur={e => cepReturn(e.target.value)}
+                />
+                </div>
 
                 <div className="form-group">
                 <label htmlFor="pais">País <sup>*</sup></label>
@@ -76,11 +99,6 @@ const LoginInfos = ({ onSubmit, voltarComponent }) => {
                 <div className="form-group">
                 <label htmlFor="bairro">Bairro </label>
                 <input type="text" name="bairro" id="bairro" value={bairro} onChange={e => setBairro(e.target.value)} />
-                </div>
-
-                <div className="form-group">
-                <label htmlFor="cep">CEP</label>
-                <input type="number" name="cep" id="cep" onChange={e => setCep(e.target.value)} />
                 </div>
 
                 <div className="form-group">
