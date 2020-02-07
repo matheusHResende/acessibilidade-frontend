@@ -7,13 +7,13 @@ import ListJobsDesactiveEmpresa from './ListJobsDesactiveEmpresa';
 //https://api-acessibilidade.herokuapp.com/vagas/empresa/id-empresa
 
 const ListJobsEmpresa = (props) => {
-    const idEmpresa = props.id;
+    const idCompany = props.id;
 
 
     return ( 
         <>
-            <ListJobsActiveEmpresa props={idEmpresa}/>
-            <ListJobsDesactiveEmpresa props={idEmpresa}/>
+            <ListJobsActiveEmpresa props={idCompany}/>
+            <ListJobsDesactiveEmpresa props={idCompany}/>
         </>
     );
 };

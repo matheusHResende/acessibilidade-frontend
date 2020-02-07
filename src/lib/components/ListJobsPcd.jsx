@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import {getVagas} from '../../requests/request';
+import ListAllJobs from '../../requests/pcd/ListAllJobs';
 import '../assets/css/ListJobsPcd.css';
 
 
 
 const ListJobsPcd = (props) => {
-    const [idVaga, setidVaga] = useState('');
+    const [idJob, setidVaga] = useState('');
     const [jobs, setJobs] = useState([]);
 
     useEffect(()=>{
-        // loadJobs();
-        getVagas(idVaga,(res) => {
-            // checa se a vaga é do tipo ativo, caso seja, armazena
-            const newResponse = res.filter(function (el){
-                return el.ativo == true;
-            });
-            setJobs([...newResponse]);
-        })
+        handleJobs();
     }, []);
 
+    async function handleJobs() {
+        const response = await ListAllJobs(idJob);
+        console.log(response);
+        const newResponse = response.filter(function (el){
+            return el.ativo == true;
+        });
+        setJobs([...newResponse]);
+    };
+
+    console.log(jobs);
     return(
         <div className="pcd-jobs-content">
             <ul className="pcd-jobs-compiled">

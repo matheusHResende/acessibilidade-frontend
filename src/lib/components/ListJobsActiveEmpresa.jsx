@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import {getVagasEmpresa} from '../../requests/request';
+import ListAllMyJobs from '../../requests/company/ListAllMyJobs';
 import '../assets/css/ListJobsEmpresa.css';
 
 
 const ListJobsActiveEmpresa = (props) => {
-    const idEmpresa = props.id;
+    const idCompany = props.props.id;
     const [myJobs, setMyJobs] = useState([]);
 
     useEffect(()=>{
-        getVagasEmpresa(idEmpresa,(res) => {
-            const newResponse = res.filter(function (el){
-                return el.ativo == true;
-            });
-            setMyJobs([...newResponse]);
-        })
+        handleJobs();
     }, []);
+
+    async function handleJobs() {
+        const response =  await ListAllMyJobs(idCompany);
+        
+        const newResponse = response.filter(function (el){
+            return el.ativo == true;
+        });
+        setMyJobs([...newResponse]);
+    }
 
     return ( 
         <div className="empresa-jobs-content">
@@ -27,7 +31,6 @@ const ListJobsActiveEmpresa = (props) => {
                             <label htmlFor="desc" className="empresa-opportunities-desc">Localidade: {myJobs.Endereco.cidade} - {myJobs.Endereco.estado} </label>
                             <button className="btn-finish">Finalizar</button>
                             <button className="btn-change">Alterar</button>
-                            <button className="btn-delete">Deletar</button>
                         </li>
                     )
                 })
