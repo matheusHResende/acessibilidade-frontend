@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
 
-import Main from '../screens/Main';
+import Main from '../screens/main';
 
 import FeedPcd from '../screens/FeedPcd';
 import FeedEmpresa from '../screens/FeedEmpresa';

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import ListAllJobs from '../../requests/pcd/ListAllJobs';
+import ListAllJobs from '../../requests/Pcd/ListAllJobs';
 import '../assets/css/ListJobsPcd.css';
 
 

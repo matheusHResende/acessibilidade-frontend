@@ -1,26 +1,25 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FaHome, FaClipboardList, FaSuitcase, FaChartLine, FaHandsHelping } from "react-icons/fa";
 
 
-import '../assets/css/SideMenu.css';
-import User_Circle from '../assets/icons/User_Circle.png';
+import { SideMenu, NavMenu,  OtherPages } from '../assets/style-components/SideMenu';
 
 const SideMenuEmpresa = (props) => {
-
     return(
-        <aside className="side-bar" aria-label="Menu do Usuário">
-            <img className="profile-pic" src={User_Circle} alt="Foto-de-perfil"/>
-            <h2 className="user-name">Nome do usuário</h2>
-            <span className="side-bar-description">
-
-                <Link to="/feedempresa">Meu perfil</Link>
-                <Link to="/feedempresa">Controle de vagas</Link>
-                <Link to="/dashboard">Dashboard</Link>
-                <Link to="/feedempresa">Freelancers</Link>
-
-            </span>
-        </aside>
-
+        <SideMenu>
+            <div className="menu-wrap">
+                <NavMenu role="navigation">
+                    <OtherPages>
+                        <li tabIndex="0"><Link to="/feedempresa"><FaHome/> Perfil </Link></li>
+                        <li tabIndex="1"><Link to="/feedempresa"><FaSuitcase/> Vagas </Link></li>
+                        <li tabIndex="2"><Link to="/feedempresa"><FaClipboardList/> Controle de vagas </Link></li>
+                        <li tabIndex="3"><Link to="/feedempresa"><FaChartLine/> Dashboard </Link></li>
+                        <li tabIndex="4"><Link to="/feedempresa"><FaHandsHelping/> Freelancers </Link></li>
+                    </OtherPages>
+                </NavMenu>
+            </div>
+        </SideMenu>
     )
 }
 
