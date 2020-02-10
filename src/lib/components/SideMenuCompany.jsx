@@ -12,10 +12,9 @@ const SideMenuEmpresa = (props) => {
                 <NavMenu role="navigation">
                     <OtherPages>
                         <li tabIndex="0"><Link to="/feedempresa"><FaHome/> Perfil </Link></li>
-                        <li tabIndex="1"><Link to="/feedempresa"><FaSuitcase/> Vagas </Link></li>
-                        <li tabIndex="2"><Link to="/feedempresa"><FaClipboardList/> Controle de vagas </Link></li>
-                        <li tabIndex="3"><Link to="/feedempresa"><FaChartLine/> Dashboard </Link></li>
-                        <li tabIndex="4"><Link to="/feedempresa"><FaHandsHelping/> Freelancers </Link></li>
+                        <li tabIndex="1"><Link to="/feedempresa"><FaClipboardList/> Controle de vagas </Link></li>
+                        <li tabIndex="2"><Link to="/feedempresa"><FaChartLine/> Dashboard </Link></li>
+                        <li tabIndex="3"><Link to="/feedempresa"><FaHandsHelping/> Freelancers </Link></li>
                     </OtherPages>
                 </NavMenu>
             </div>

@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 
 export const NavMenu = styled.nav`
- 
+    
     a{
-      padding: 30px 0;
+      padding: 30px 15px;
       color: black;
       font: 400 1.125em;
       text:{
@@ -20,8 +20,6 @@ export const NavMenu = styled.nav`
 
 export const OtherPages = styled.ul`
   list-style: none; 
-  text-align: center;
-  padding: 0; 
   margin: 0;
   a{ 
     text-decoration: none; 
@@ -69,4 +67,8 @@ export const  SideMenu = styled.aside`
   left: 0;
   width: 344px;
   background: white;
+
+  @media (max-width: 1000px) {
+    display: none;
+  }
 `;

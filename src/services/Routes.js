@@ -5,7 +5,7 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import Main from '../screens/main';
 
 import FeedPcd from '../screens/FeedPcd';
-import FeedEmpresa from '../screens/FeedEmpresa';
+import FeedCompany from '../screens/FeedCompany';
 
 
 export default function Routes(){
@@ -14,7 +14,7 @@ export default function Routes(){
             <Switch>
                 <Route exact path="/" component={Main}/>
                 <Route exact path="/feedpcd" component={FeedPcd}/>
-                <Route exact path="/feedempresa" component={FeedEmpresa}/>
+                <Route exact path="/feedempresa" component={FeedCompany}/>
 
 
             </Switch>
