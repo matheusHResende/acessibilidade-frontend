@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const JobsContent = styled.div`
+export const MainContent = styled.div`
     width: 100%;
     max-width: 1200px;
     margin-left: 300px;

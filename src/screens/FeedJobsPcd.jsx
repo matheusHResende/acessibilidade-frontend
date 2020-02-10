@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 //request
 import ListAllJobs from '../requests/Pcd/ListAllJobs';
 //components
-import ListJobs from '../lib/components/ListJobs';
+import ListJobsPcd from '../lib/components/ListJobsPcd';
 //style
-import { JobsContent, JobsCompiled} from '../lib/assets/style-components/FeedJobs';
+import { JobsCompiled, MainContent} from '../lib/assets/style-components/FeedJobs';
 
 
-const ListJobsPcd = (props) => {
+//teste
+import teste from '../requests/test.json';
+//teste
+
+const FeedJobsPcd = (props) => {
     const [idJob, setidVaga] = useState('');
     const [jobs, setJobs] = useState([]);
 
@@ -16,26 +20,27 @@ const ListJobsPcd = (props) => {
     }, []);
 
     async function handleJobs() {
-        const response = await ListAllJobs(idJob);
-        console.log(response);
-        const newResponse = response.filter(function (el){
-            return el.ativo == true;
-        });
+        // const response = await ListAllJobs(idJob);
+        // console.log(response);
+        // const newResponse = response.filter(function (el){
+        //     return el.ativo == true;
+        // });
+        const newResponse = teste.vagas;
         setJobs([...newResponse]);
     };
 
     console.log(jobs);
     return(
-        <JobsContent>
+        <MainContent>
             <JobsCompiled>
             {jobs.map(function(jobs, id){
                     return(
-                        <ListJobs props={jobs} key={id} type="pcd"/>
+                        <ListJobsPcd props={jobs} key={id}/>
                     )
                 })}
             </JobsCompiled>
-        </JobsContent>
+        </MainContent>
     );
 };
 
-export default ListJobsPcd; 
+export default FeedJobsPcd; 

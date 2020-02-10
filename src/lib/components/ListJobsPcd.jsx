@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Job, Name, Description, Enterprise, Button } from '../assets/style-components/ListJobs';
 const ListJobs = (props) => {
 
+    console.log(props);
     const jobsDetails = {
         id: props.props.id,
         name: props.props.titulo,
@@ -17,7 +19,7 @@ const ListJobs = (props) => {
                 <Enterprise> {jobsDetails.enterprise} </Enterprise>
                 <Description> Quantidade de vagas: {jobsDetails.amount} </Description>
                 <Description> Localidade: {jobsDetails.location} </Description>
-                <Button> Ver Mais </Button>
+                <Link to={{pathname: '/jobdetailpcd', aboutProps: { id:jobsDetails.id}}}  ><Button>Ver Mais</Button> </Link> 
             </Job>
         </>
     );

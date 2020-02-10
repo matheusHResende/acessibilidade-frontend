@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react';
 //request
 import ListAllMyJobs from '../requests/company/ListAllMyJobs';
 //components
-import ListJobs from '../lib/components/ListJobs';
+import ListJobsCompany from '../lib/components/ListJobsCompany';
 //style
-import { JobsContent, JobsCompiled} from '../lib/assets/style-components/FeedJobs';
+import {  MainContent, JobsCompiled} from '../lib/assets/style-components/FeedJobs';
 
 
 
 
-const ListJobsCompany = (props) => {
+const FeedJobsCompany = (props) => {
     const idCompany = props.props.id;
     const [myJobs, setMyJobs] = useState([]);
 
@@ -27,16 +27,16 @@ const ListJobsCompany = (props) => {
     }
 
     return ( 
-        <JobsContent>
+        <MainContent>
             <JobsCompiled>
             {myJobs.map(function(myJobs, id){
                     return(
-                        <ListJobs props={myJobs} key={id} type="company"/>
+                        <ListJobsCompany props={myJobs, {type:'company'}} key={id}/>
                     )
                 })}
             </JobsCompiled>
-        </JobsContent>
+        </MainContent>
     )
 };
 
-export default ListJobsCompany;
+export default FeedJobsCompany;
