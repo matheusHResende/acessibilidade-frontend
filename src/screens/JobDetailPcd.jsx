@@ -4,15 +4,12 @@ import ShowjobDetails from '../requests/common-request/ShowJobDetails';
 //components
 import SideMenuPcd from '../lib/components/SideMenuPcd';
 import SearchBarPcd from '../lib/components/SearchBarPcd';
+import DetailJobsPcd from '../lib/components/DetailJobsPcd';
 //style
 import {  Header, Main } from '../lib/assets/style-components/Feed';
 
-//teste
-import jobdetail from '../requests/jobdetai.json';
-
-
 const JobDetailPcd = (props) => {
-    // const { id } = props.location.aboutProps;
+    const { id } = props.location.aboutProps;
     const [detail, setDetail] = useState({});
 
     useEffect(()=>{
@@ -20,16 +17,14 @@ const JobDetailPcd = (props) => {
     }, [])
 
     async function handleDetails() {
-        const { titulo,  descricao} = await jobdetail.vagas;
-        const { razao_social } = await jobdetail.vagas.Usuario_Empresa;
-        const { pais, estado, cidade, bairro, logradouro, numero, complemento } = await jobdetail.vagas.Endereco;
+        const response = await ShowjobDetails(id);
+        const { titulo,  descricao} =  response.vagas;
+        const { razao_social } =  response.vagas.Usuario_Empresa;
+        const { pais, estado, cidade, bairro, logradouro, numero, complemento } =  response.vagas.Endereco;
 
 
-        // const res = await ShowjobDetails(id);
         setDetail({name:titulo, description:descricao, company:razao_social, country:pais, state:estado, city:cidade, nbh:bairro, street:logradouro, number:numero, apt:complemento });
     };
-
-    console.log(detail);
 
     return (
         <>
@@ -39,24 +34,7 @@ const JobDetailPcd = (props) => {
 
             <Main>
                 <SideMenuPcd/>
-
-                {/* componentizar */}
-                <div>
-                    <header>
-                        <h2>{detail.name}</h2>
-                        <button>Candidatar</button>
-                        <label htmlFor="">{detail.company}</label>
-                    </header>
-                    <main>
-                        <label htmlFor="">Sobre </label>
-                        <label htmlFor="">{detail.description}</label>
-                        <label htmlFor="">Localidade</label>
-                        <label htmlFor="">Rua: {detail.street}, nº {detail.number} - {detail.city}</label>
-                        <label htmlFor="">{detail.city} - {detail.state}</label>
-                    </main>
-                </div>
-                {/* componentizar */}
-
+                <DetailJobsPcd props={detail}/>
             </Main>
         </>
     );

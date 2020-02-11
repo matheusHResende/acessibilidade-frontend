@@ -9,6 +9,18 @@ export const Job = styled.li`
     border-style: groove; 
     display: flex;
     flex-wrap: wrap;
+
+    a{
+        display: flex;
+        flex: auto;
+        right: 0;
+        bottom: 0;
+        width: 100px;
+        height: 50px;
+        margin: 15px;
+        order: 4;
+        text-decoration: none;
+    }
 `;
 
 export const Name = styled.h2`
@@ -16,7 +28,7 @@ export const Name = styled.h2`
     flex: 1 100%;
     justify-items: flex-start;
     order: 1;
-    font-size: 32px;
+    font-size: 40px;
     margin-bottom: 20px;
 `;
 
@@ -25,7 +37,12 @@ export const Description = styled.label`
     flex: 1 100%;
     text-align: left;
     order: 2;
-    font-size: 16px;
+    font-size: 18px;
+
+    p{
+        font-weight: bold;
+    }
+
 `;
 
 export const Enterprise = styled.label`
@@ -34,7 +51,8 @@ export const Enterprise = styled.label`
     margin-top: 0;
     margin-bottom: 20px;
     font: bold;
-    font-size: 20px;
+    font-weight: bold;
+    font-size: 25px;
 `;
 export const Button = styled.button`
     font-size: 20px;
@@ -43,8 +61,6 @@ export const Button = styled.button`
     order: 4;
     width: 100%;
     height: 50px;
-    margin: 15px;
-
     &:hover {
         color: white;
         background-color:  #028dc1 !important;

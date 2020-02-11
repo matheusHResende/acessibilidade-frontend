@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaClipboardList, FaSuitcase, FaChartLine, FaHandsHelping } from "react-icons/fa";
-
+import { FaHome, FaClipboardList, FaChartLine, FaHandsHelping } from "react-icons/fa";
 
 import { SideMenu, NavMenu,  OtherPages } from '../assets/style-components/SideMenu';
 

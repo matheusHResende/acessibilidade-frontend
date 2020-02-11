@@ -7,8 +7,6 @@ import ListJobsCompany from '../lib/components/ListJobsCompany';
 import {  MainContent, JobsCompiled} from '../lib/assets/style-components/FeedJobs';
 
 
-
-
 const FeedJobsCompany = (props) => {
     const idCompany = props.props.id;
     const [myJobs, setMyJobs] = useState([]);
@@ -31,7 +29,7 @@ const FeedJobsCompany = (props) => {
             <JobsCompiled>
             {myJobs.map(function(myJobs, id){
                     return(
-                        <ListJobsCompany props={myJobs, {type:'company'}} key={id}/>
+                        <ListJobsCompany props={myJobs} key={id}/>
                     )
                 })}
             </JobsCompiled>

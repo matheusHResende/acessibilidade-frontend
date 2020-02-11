@@ -11,9 +11,8 @@ export const NavMenu = styled.nav`
         align: center;
         transform: lowercase;
       }
-      
       &:hover{
-        color: blue;
+        color: #003FCC;
       }
     }
 `;
@@ -37,16 +36,16 @@ export const OtherPages = styled.ul`
     transition: .35s ease color;
         
     &:before{
-    content: '';
-    display: block;
-    z-index: -1;
-    position: absolute;
-    left: -100%; 
-    top: 0;
-    width: 100%; 
-    height: 100%;
-    opacity:0.5;
-    background: #77e4ff;
+      content: '';
+      display: block;
+      z-index: -1;
+      position: absolute;
+      left: -100%; 
+      top: 0;
+      width: 100%; 
+      height: 100%;
+      opacity:0.5;
+      background: #C1D4FF;
     }
         
     &.is-current,

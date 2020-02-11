@@ -17,8 +17,8 @@ const ListJobs = (props) => {
             <Job key={jobsDetails.id}>
                 <Name> {jobsDetails.name} </Name>
                 <Enterprise> {jobsDetails.enterprise} </Enterprise>
-                <Description> Quantidade de vagas: {jobsDetails.amount} </Description>
-                <Description> Localidade: {jobsDetails.location} </Description>
+                <Description><p> Quantidade de vagas: </p>{jobsDetails.amount} </Description>
+                <Description><p> Localidade: </p>{jobsDetails.location} </Description>
                 <Link to={{pathname: '/jobdetailpcd', aboutProps: { id:jobsDetails.id}}}  ><Button>Ver Mais</Button> </Link> 
             </Job>
         </>
