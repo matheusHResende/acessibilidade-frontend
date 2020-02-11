@@ -7,10 +7,6 @@ import ListJobsPcd from '../lib/components/ListJobsPcd';
 import { JobsCompiled, MainContent} from '../lib/assets/style-components/FeedJobs';
 
 
-//teste
-import teste from '../requests/test.json';
-//teste
-
 const FeedJobsPcd = (props) => {
     const [idJob, setidVaga] = useState('');
     const [jobs, setJobs] = useState([]);
@@ -20,12 +16,12 @@ const FeedJobsPcd = (props) => {
     }, []);
 
     async function handleJobs() {
-        // const response = await ListAllJobs(idJob);
-        // console.log(response);
-        // const newResponse = response.filter(function (el){
-        //     return el.ativo == true;
-        // });
-        const newResponse = teste.vagas;
+        const response = await ListAllJobs(idJob);
+        console.log(response);
+        const newResponse = response.filter(function (el){
+            return el.ativo == true;
+        });
+
         setJobs([...newResponse]);
     };
 
