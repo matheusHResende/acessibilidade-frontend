@@ -10,10 +10,10 @@ const SideMenuEmpresa = (props) => {
             <div className="menu-wrap">
                 <NavMenu role="navigation">
                     <OtherPages>
-                        <li tabIndex="0"><Link to="/feedempresa"><FaHome/> Perfil </Link></li>
-                        <li tabIndex="1"><Link to="/feedempresa"><FaClipboardList/> Controle de vagas </Link></li>
-                        <li tabIndex="2"><Link to="/feedempresa"><FaChartLine/> Dashboard </Link></li>
-                        <li tabIndex="3"><Link to="/feedempresa"><FaHandsHelping/> Freelancers </Link></li>
+                        <li tabIndex="0"><Link to="/profilecompany"><FaHome/> Perfil </Link></li>
+                        <li tabIndex="1"><Link to="/feedcompany"><FaClipboardList/> Controle de vagas </Link></li>
+                        <li tabIndex="2"><Link to="/feedcompany"><FaChartLine/> Dashboard </Link></li>
+                        <li tabIndex="3"><Link to="/feedcompany"><FaHandsHelping/> Freelancers </Link></li>
                     </OtherPages>
                 </NavMenu>
             </div>

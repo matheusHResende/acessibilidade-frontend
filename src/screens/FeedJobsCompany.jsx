@@ -4,7 +4,7 @@ import ListAllMyJobs from '../requests/company/ListAllMyJobs';
 //components
 import ListJobsCompany from '../lib/components/ListJobsCompany';
 //style
-import {  MainContent, JobsCompiled} from '../lib/assets/style-components/FeedJobs';
+import {  MainContent, Content} from '../lib/assets/style-components/Main';
 
 
 const FeedJobsCompany = (props) => {
@@ -26,13 +26,17 @@ const FeedJobsCompany = (props) => {
 
     return ( 
         <MainContent>
-            <JobsCompiled>
-            {myJobs.map(function(myJobs, id){
-                    return(
-                        <ListJobsCompany props={myJobs} key={id}/>
-                    )
-                })}
-            </JobsCompiled>
+            <Content>
+                <ul>
+                    <h1>Minhas vagas:</h1>
+                    {myJobs.map(function(myJobs, id){
+                        return(
+                            <ListJobsCompany props={myJobs} key={id}/>
+                        )
+                    })}
+                </ul>
+
+            </Content>
         </MainContent>
     )
 };

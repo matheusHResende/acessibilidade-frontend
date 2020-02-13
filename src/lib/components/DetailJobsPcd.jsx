@@ -2,7 +2,7 @@ import React from 'react';
 
 //style
 import { FaCheck } from "react-icons/fa";
-import {  JobDetail, HeadDetail, ButtonAply, Details } from '../assets/style-components/JobDetail';
+import {  JobDetail, HeadDetail, Button, Details } from '../assets/style-components/JobDetail';
 
 
 
@@ -13,7 +13,7 @@ const DetailJobsPcd = (props) => {
             <JobDetail>
                 <HeadDetail>
                     <h2 tabIndex='0'>{name}</h2>
-                    <ButtonAply tabIndex='8' arial-label='Candidatar-se'><FaCheck/> Candidatar</ButtonAply>
+                    <Button tabIndex='8' arial-label='Candidatar-se' type="submit"><FaCheck/> Candidatar</Button>
                     <label tabIndex='1'>{company}</label>
                 </HeadDetail>
                 <Details>

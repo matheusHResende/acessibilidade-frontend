@@ -35,16 +35,20 @@ export const HeadDetail = styled.header`
     }
 `;
 
-export const ButtonAply = styled.button`
+export const Button = styled.button`
     position: absolute;
     top: 0;
     right: 0;
     margin: 22px;
     font-size: 25px;
-    padding: 5px 50px;
+    padding: 5px 30px;
     border-radius: 5px;
+    background-color: #151515;
+    color: #FFFFFF;
+    cursor:pointer;
 
-    svg {
+    svg{
+        color: #FFFFFF;
         margin-right: 25px;
       }
 `;
@@ -55,8 +59,8 @@ export const Details = styled.main`
     font-size: 20px;
     h3{
         font-size: 30px;
-        color: blue;
-        border-bottom: 5px solid blue;
+        color: #151515;
+        border-bottom: 5px solid #151515;
         text-align: center;
     }
     p{

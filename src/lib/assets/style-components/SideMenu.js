@@ -12,7 +12,7 @@ export const NavMenu = styled.nav`
         transform: lowercase;
       }
       &:hover{
-        color: #003FCC;
+        color: #E4E4E4;
       }
     }
 `;
@@ -44,8 +44,7 @@ export const OtherPages = styled.ul`
       top: 0;
       width: 100%; 
       height: 100%;
-      opacity:0.5;
-      background: #C1D4FF;
+      background: #151515;
     }
         
     &.is-current,

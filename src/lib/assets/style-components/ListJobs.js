@@ -56,14 +56,14 @@ export const Enterprise = styled.label`
 `;
 export const Button = styled.button`
     font-size: 20px;
-    border: 4px solid #028dc1 !important;
+    border: 4px solid #151515 !important;
     border-radius: 6px;
     order: 4;
     width: 100%;
     height: 50px;
     &:hover {
         color: white;
-        background-color:  #028dc1 !important;
+        background-color:  #151515 !important;
         border-radius: 50px;
         transition: all 0.3s ease 0s;
     }

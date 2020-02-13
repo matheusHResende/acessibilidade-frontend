@@ -8,6 +8,8 @@ import DetailJobsPcd from '../lib/components/DetailJobsPcd';
 //style
 import {  Header, Main } from '../lib/assets/style-components/Feed';
 
+
+
 const JobDetailPcd = (props) => {
     const { id } = props.location.aboutProps;
     const [detail, setDetail] = useState({});
@@ -25,7 +27,7 @@ const JobDetailPcd = (props) => {
 
         setDetail({name:titulo, description:descricao, company:razao_social, country:pais, state:estado, city:cidade, nbh:bairro, street:logradouro, number:numero, apt:complemento });
     };
-
+    console.log(detail);
     return (
         <>
             <Header>

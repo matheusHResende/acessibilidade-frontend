@@ -7,7 +7,7 @@ export const Header = styled.header`
     display: flex;
     justify-content: center;
     padding: 10px;
-    background: #3CF2E7;
+    background: #151515;
     margin-bottom: 100px;
     z-index: 1;
 `;
@@ -25,4 +25,7 @@ export const Main = styled.main`
     @media (max-width: 1100px) {
         margin: 0;
     }
+`;
+export const Logo = styled.image`
+    
 `;

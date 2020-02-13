@@ -5,7 +5,7 @@ import FeedJobsPcd from './FeedJobsPcd';
 import SideMenuPcd from '../lib/components/SideMenuPcd';
 import SearchBarPcd from '../lib/components/SearchBarPcd';
 //style
-import {  Header, Main } from '../lib/assets/style-components/Feed';
+import {  Header, Main, Logo } from '../lib/assets/style-components/Feed';
 
 const FeedPcd = (props) => {
 

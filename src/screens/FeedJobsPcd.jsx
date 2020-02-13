@@ -4,7 +4,7 @@ import ListAllJobs from '../requests/Pcd/ListAllJobs';
 //components
 import ListJobsPcd from '../lib/components/ListJobsPcd';
 //style
-import { JobsCompiled, MainContent} from '../lib/assets/style-components/FeedJobs';
+import { Content, MainContent} from '../lib/assets/style-components/Main';
 
 
 const FeedJobsPcd = (props) => {
@@ -21,20 +21,22 @@ const FeedJobsPcd = (props) => {
         const newResponse = response.filter(function (el){
             return el.ativo == true;
         });
-
         setJobs([...newResponse]);
     };
 
     console.log(jobs);
     return(
         <MainContent>
-            <JobsCompiled>
-            {jobs.map(function(jobs, id){
-                    return(
-                        <ListJobsPcd props={jobs} key={id}/>
-                    )
-                })}
-            </JobsCompiled>
+            <Content>
+                <ul>
+                <h1>Vagas:</h1>
+                {jobs.map(function(jobs, id){
+                        return(
+                            <ListJobsPcd props={jobs} key={id}/>
+                        )
+                    })}
+                </ul>
+            </Content>
         </MainContent>
     );
 };

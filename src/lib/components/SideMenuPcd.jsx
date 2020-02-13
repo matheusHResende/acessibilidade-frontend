@@ -10,7 +10,7 @@ const SideMenuPcd = (props) => {
             <div className="menu-wrap">
                 <NavMenu role="navigation">
                     <OtherPages>
-                        <li tabIndex="0"><Link to="/"><FaHome/> Perfil </Link></li>
+                        <li tabIndex="0"><Link to="/profilepcd"><FaHome/> Perfil </Link></li>
                         <li tabIndex="1"><Link to="/feedpcd"><FaSuitcase/> Vagas </Link></li>
                         <li tabIndex="2"><Link to="/feedpcd"><FaClipboardList/> Vagas candidatadas </Link></li>
                     </OtherPages>
