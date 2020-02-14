@@ -1,25 +1,22 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { FaHome, FaClipboardList, FaSuitcase } from "react-icons/fa";
 
-
-import '../assets/css/SideMenu.css';
-import User_Circle from '../assets/icons/User_Circle.png';
+import { SideMenu, NavMenu,  OtherPages } from '../assets/style-components/SideMenu';
 
 const SideMenuPcd = (props) => {
-
     return(
-        <aside className="side-bar" aria-label="Menu do Usuário">
-            <img className="profile-pic" src={User_Circle} alt="Foto-de-perfil"/>
-            <h2 className="user-name">Olá, Nome do usuário</h2>
-            <span className="side-bar-description">
-                
-            <Link to="/feedpcd">Meu perfil</Link>
-            <Link to="/feedpcd">Meu currículo</Link>
-            <Link to="/feedpcd">Minhas candidaturas</Link>
-            <Link to="/feedpcd">Vagas</Link>
-            </span>
-        </aside>
-
+        <SideMenu>
+            <div className="menu-wrap">
+                <NavMenu role="navigation">
+                    <OtherPages>
+                        <li tabIndex="0"><Link to="/profilepcd"><FaHome/> Perfil </Link></li>
+                        <li tabIndex="1"><Link to="/feedpcd"><FaSuitcase/> Vagas </Link></li>
+                        <li tabIndex="2"><Link to="/feedpcd"><FaClipboardList/> Vagas candidatadas </Link></li>
+                    </OtherPages>
+                </NavMenu>
+            </div>
+        </SideMenu>
     )
 }
 

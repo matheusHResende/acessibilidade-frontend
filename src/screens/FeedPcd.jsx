@@ -1,24 +1,24 @@
 import React from 'react';
-//componentes
-import ListJobsPcd from '../lib/components/ListJobsPcd';
-import SearchBarPcd from '../lib/components/SearchBarPcd';
+//pages
+import FeedJobsPcd from './FeedJobsPcd';
+//components
 import SideMenuPcd from '../lib/components/SideMenuPcd';
-
-
-//estilo
-import '../lib/assets/css/Feed.css';
+import SearchBarPcd from '../lib/components/SearchBarPcd';
+//style
+import {  Header, Main, Logo } from '../lib/assets/style-components/Feed';
 
 const FeedPcd = (props) => {
 
     return (
         <>
-            <header>
+            <Header>
                 <SearchBarPcd/>
-            </header>
-            <main>
+            </Header>
+
+            <Main>
                 <SideMenuPcd/>
-                <ListJobsPcd/>
-            </main>
+                <FeedJobsPcd/>
+            </Main>
         </>
     );
 };
