@@ -1,0 +1,21 @@
+.side-bar {
+    left: 0;
+    border-radius: 5px;
+    float: left;
+    position: fixed;
+    width: 250px;
+    height: 350px;
+    border: 2px solid;
+    z-index: 2;
+    text-align: center;
+}
+.side-bar .profile-pic {
+    margin:10px;
+    height: 100px;
+    width: 100px;
+}
+.side-bar .side-bar-description a{
+    display: block;
+    font-size: 18px;
+    margin-top: 15px;
+}
