@@ -1,6 +1,8 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
 
+import PrivateRoute from '../lib/components/PrivateRoute';
+
 
 import Main from '../screens/main';
 
@@ -12,6 +14,8 @@ import ProfilePcd from '../screens/ProfilePcd';
 import ProfileCompany from '../screens/ProfileCompany';
 
 
+// import FeedPcd from '../screens/FeedPcd';
+// import FeedEmpresa from '../screens/FeedEmpresa';
 
 export default function Routes(){
     return (
@@ -23,8 +27,6 @@ export default function Routes(){
                 <Route exact path="/jobdetailpcd" component={JobDetailPcd}/>
                 <Route exact path="/jobdetailcompany" component={JobDetailCompany}/>
                 <Route exact path="/profilecompany" component={ProfileCompany}/>
-
-
             </Switch>
         </BrowserRouter>
     )
