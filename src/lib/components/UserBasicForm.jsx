@@ -1,11 +1,33 @@
 import React, { useState, useEffect } from "react";
 
-import '../assets/css/UserBasicForm.css'
+import { Main, Form, Title, Header, Logo, Login, InputGroup, DuoInputGroup, HeaderButtonGroup, Error, Button, BackButton } from '../assets/css/CadForms';
 import ValidarEmail from '../assets/const/ValidarEmail.js';
 
-const UserBasic = ({ onSubmit, user_type, voltarComponent }) => { 
+const UserBasic = ({ onSubmit, user_type, history, error, voltarComponent }) => { 
     useEffect(() => document.querySelector('input[name="nome"]').focus(), [])
     
+
+    const [ nome, setNome ] = useState('');
+    const [ nome_de_usuario, setUsuario ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ senha, setSenha ] = useState('');
+    const [ confirmar_senha, setConfirmarSenha ] = useState('');
+    const [ err, setErro ] = useState('');
+    
+    useEffect(() => {
+        if ( error === "Usuario já existe!" ) {
+            document.getElementById('error').style.display = "block";
+            setErro(error);
+            document.querySelector('input[name="usuario"]').focus()
+        }else {
+            if ( error === "Email em uso!" ) {
+                document.getElementById('error').style.display = "block";
+                setErro(error);
+                document.querySelector('input[name="email"]').focus()
+            }
+        }
+    }, [error])
+
     const userType = user_type;
     const [ labelName, setLabelName ] = useState('');
     const [ id_tipo_usuario, setTipoUsuario ] = useState(0);
@@ -35,13 +57,6 @@ const UserBasic = ({ onSubmit, user_type, voltarComponent }) => {
                 setTipoUsuario(1)
         }
     },[ user_type ])
-
-    const [ nome, setNome ] = useState('');
-    const [ nome_de_usuario, setUsuario ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ senha, setSenha ] = useState('');
-    const [ confirmar_senha, setConfirmarSenha ] = useState('');
-    const [ erro, setErro ] = useState('');
 
     function registarDados(e){
         e.preventDefault();
@@ -97,75 +112,131 @@ const UserBasic = ({ onSubmit, user_type, voltarComponent }) => {
 
     function conferirEmail(e){
         let setDisplay = document.getElementById('error');
-
-        if(e.indexOf("@") !== -1){
-            if(ValidarEmail(e) === false){
-                setDisplay.style.display = "block";
-                setErro('Preencha seu email corretamente!')
-                document.querySelector('input[name="email"]').focus();
-            }else{
-                setErro('');
-                setDisplay.style.display = "none";
-            }
+        
+        if(ValidarEmail(e) === false){
+            setDisplay.style.display = "block";
+            setErro('Preencha seu email corretamente!')
+            document.querySelector('input[name="email"]').focus();
+        }else{
+            setErro('');
+            setDisplay.style.display = "none";
         }
+        
         
     }
 
     return(
-        <main>
-            <form>
-                <h1>Informações básicas para login</h1>
+        <Main>
 
-                <span className="error" id="error">{erro}</span>
+            <Header>
+                <Logo />
 
-                <label htmlFor="nome">{ labelName } <sup>*</sup></label>
-                <input 
-                    type="text" 
-                    name="nome" 
-                    id="nome" 
-                    value={ nome } 
-                    onChange={e => setNome(e.target.value)} 
-                    placeholder={ labelName === 'Nome Completo' ? "Por favor digite seu nome completo" : "Por favor digite o nome fantasia de sua empresa"}
-                />
+                <HeaderButtonGroup>
+                    <Login onClick={() => history.push('/login')}>
+                        Entrar
+                    </Login>
+                </HeaderButtonGroup>
+            </Header>
+                
+            <Title>
+                Informações básicas para login
+            </Title>
+            
+            <Form>
 
-                <label htmlFor="usuario">Nome de Usuário <sup>*</sup></label>
-                <input 
-                    type="text" 
-                    name="usuario" 
-                    id="usuario" 
-                    value={ nome_de_usuario } 
-                    placeholder={ labelName === 'Nome Completo' ? "Por favor digite um novo nome de usuário" : "Por favor digite o novo nome de usuário para sua empresa"}
-                    onChange={e => setUsuario(e.target.value)} 
-                />
+                <Error id="error">
+                    { err }
+                </Error>
 
-                <label htmlFor="email">Email <sup>*</sup></label>
-                <input 
-                    type="email" 
-                    name="email" 
-                    id="email" 
-                    placeholder={ labelName === 'Nome Completo' ? "Por favor digite seu nome completo" : "Por favor digite o nome fantasia de sua empresa"}
-                    onChange={e => setEmail(e.target.value)}
-                    onBlur={e => conferirEmail(e.target.value)} 
-                />
+                <InputGroup>
+                    <label htmlFor="nome">
+                        { labelName } <sup>*</sup>
+                    </label>
 
-                <div className="passwordGroup">
-                    <div className="passwordGroupComponent">
-                        <label htmlFor="senha">Senha <sup>*</sup></label>
-                        <input type="password" name="senha" id="senha" value={ senha } onChange={e => setSenha(e.target.value)} />
-                    </div>
+                    <input 
+                        type="text" 
+                        name="nome" 
+                        id="nome" 
+                        value={ nome } 
+                        onChange={e => setNome(e.target.value)} 
+                        placeholder={ labelName === 'Nome Completo' ? "Por favor digite seu nome completo" : "Por favor digite o nome fantasia de sua empresa"}
+                    />
+                </InputGroup>
 
-                    <div className="passwordGroupComponent">
-                        <label htmlFor="confirmar_senha">Confirmar Senha <sup>*</sup></label>
-                        <input type="password" name="confirmar_senha" id="confirmar_senha" value={ confirmar_senha } onChange={e => setConfirmarSenha(e.target.value)} />
-                    </div>
-                </div>
+                <InputGroup>
+                    <label htmlFor="usuario">
+                        Nome de Usuário <sup>*</sup>
+                    </label>
+                    
+                    <input 
+                        type="text" 
+                        name="usuario" 
+                        id="usuario" 
+                        value={ nome_de_usuario } 
+                        placeholder={ labelName === 'Nome Completo' ? "Por favor digite um novo nome de usuário" : "Por favor digite o novo nome de usuário para sua empresa"}
+                        onChange={e => setUsuario(e.target.value)} 
+                    />
+                </InputGroup>
 
-                <div className="buttonGroup">
-                    <button type="button" name="voltar" onClick={ voltarComponent }>Voltar</button>
-                    <button type="submit" name="avançar" onClick={ registarDados }>Próximo</button>
-                </div>
-            </form>
-        </main>
+                <InputGroup>
+                    <label htmlFor="email">
+                        Email <sup>*</sup>
+                    </label>
+                    
+                    <input 
+                        type="email" 
+                        name="email" 
+                        id="email"
+                        placeholder={ labelName === 'Nome Completo' ? "Por favor digite seu nome completo" : "Por favor digite o nome fantasia de sua empresa"}
+                        onBlur={e => e.target.value === '' ? '' : conferirEmail(e.target.value)}
+                        onChange={e => setEmail(e.target.value)}
+                    />
+                </InputGroup>
+
+                <DuoInputGroup>
+                    <InputGroup className="password">
+                        <label htmlFor="senha">
+                            Senha <sup>*</sup>
+                        </label>
+                        
+                        <input 
+                            type="password" 
+                            name="senha" 
+                            id="senha" 
+                            value={ senha } 
+                            onChange={e => setSenha(e.target.value)} 
+                        />
+                    </InputGroup>
+                    
+                    <InputGroup className="password">
+                        <label htmlFor="confirmar_senha">
+                            Confirmar Senha <sup>*</sup>
+                        </label>
+                        
+                        <input 
+                            type="password" 
+                            name="confirmar_senha" 
+                            id="confirmar_senha" 
+                            value={ confirmar_senha } 
+                            onChange={e => setConfirmarSenha(e.target.value)} 
+                        />
+                    </InputGroup>
+                </DuoInputGroup>
+                
+                <Button type="submit" name="avançar" onClick={ registarDados }>Próximo</Button>
+            </Form>
+
+            <BackButton
+                type="button"
+                name="voltar"
+                id="voltar"
+                onClick={voltarComponent}
+            >
+                <i className="material-icons">
+                    arrow_back
+                </i>
+            </BackButton>
+        </Main>
     )
 }
 

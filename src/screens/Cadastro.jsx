@@ -1,48 +1,50 @@
 import React, { useState } from 'react';
 
-import '../lib/assets/css/PageCadastro.css';
 import SelectUser from '../lib/components/SelectUser.jsx';
 import UserBasicForm from '../lib/components/UserBasicForm.jsx';
 import PersonalInfosFormPcD from '../lib/components/PersonalInfosFormPcD.jsx';
 import CompanyInfosForm from '../lib/components/CompanyInfosForm.jsx';
 import FreelancerInfosForm from '../lib/components/FreelancerInfosForm.jsx';
 import AddressFomr from '../lib/components/AddressForm.jsx';
+import Loading from '../lib/components/Loading.jsx';
 
-import RequestCadastroFreelancer from '../requests/CadastroFreelancer/RequestCadastroFreelancer.js';
-import RequestCadastroEmpresa from '../requests/CadastroEmpresa/RequestCadastroEmpresa.js';
-import RequestCadastroPcD from '../requests/CadastroPcd/RequestCadastroPcD.js';
-
-const Cadastro = () =>{
+const Cadastro = ({ history }) =>{
+    document.title = "Cadastrar - IncluJobs"
     const [ user_type, setUserType ] = useState("");
     const [ counter, setCounter ] = useState(0);
 
+    const [ error, setErr ] = useState('');
+    const [ dadosFinais, setDadosFinais ] = useState()
+
     // Infos de Login
-    const [cadastroPcDLogin, setCadastroPcDLogin] = useState({});
-    const [cadastroEmpresaLogin, setCadastroEmpresaLogin] = useState({});
-    const [cadastroFreelancerLogin, setCadastroFreelancerLogin] = useState({});
+    const [ cadastroLogin, setCadastroLogin ] = useState({});
     // Infos Básicas
-    const [cadastroPcD, setCadastroPcD] = useState({});
-    const [cadastroEmpresa, setCadastroEmpresa] = useState({});
-    const [cadastroFreelancer, setCadastroFreelancer] = useState({});
+    const [ cadastroPcD, setCadastroPcD ] = useState({});
+    const [ cadastroEmpresa, setCadastroEmpresa ] = useState({});
+    const [ cadastroFreelancer, setCadastroFreelancer ] = useState({});
+
+    // Infos de endereço
+    const [endereco, setEndereco] = useState({});
+
     function handleSubmit(usuario){
         switch(usuario.id_tipo_usuario){
             case 1:
-                setCadastroPcDLogin(usuario)
+                setCadastroLogin(usuario)
                 setCounter(2);
                 break;
 
             case 2:
-                setCadastroEmpresaLogin(usuario)
+                setCadastroLogin(usuario)
                 setCounter(3);
                 break;
 
             case 3:
-                setCadastroFreelancerLogin(usuario)
+                setCadastroLogin(usuario)
                 setCounter(4);
                 break;
 
             default:
-                setCadastroPcDLogin(usuario)
+                setCadastroLogin(usuario)
         }
     };
     
@@ -85,7 +87,8 @@ const Cadastro = () =>{
                 cpf: infos.cpf,
                 telefone_fixo: infos.telefone_fixo,
                 telefone_celular: infos.telefone_celular,
-                dt_nascimento: infos.dt_nascimento
+                dt_nascimento: infos.dt_nascimento,
+                especialidade: infos.especialidade
             }  
         );
         
@@ -94,83 +97,63 @@ const Cadastro = () =>{
 
     
     // Cadastro Final
-    const [cadastroFinal, setCadastroFinal] = useState({});
-    const [ err, setErr ] = useState('');
-
     async function cadastro(){
-        if(cadastroFinal.usuario.id_tipo_usuario === 1){
-            let e = await RequestCadastroPcD(cadastroFinal)
-            if(e.data.error){
-                setErr(e)
-            }
+        switch(user_type){
+            case "deficiente":
+                setDadosFinais({
+                    usuario: cadastroLogin,
+                    endereco,
+                    usuario_pcd: cadastroPcD
+                })
+                break;
+            case "empresa":
+                setDadosFinais({
+                    usuario: cadastroLogin,
+                    endereco,
+                    usuario_empresa: cadastroEmpresa
+                })
+                break;
+            case "freelancer":
+                setDadosFinais({
+                    usuario: cadastroLogin,
+                    endereco,
+                    usuario_freelancer: cadastroFreelancer
+                })
+                break;
+        default:
         }
-        else if(cadastroFinal.usuario.id_tipo_usuario === 2){
-            let e = await RequestCadastroEmpresa(cadastroFinal)
-            if(e.data.error){
-                setErr(e)
-            }
-        }
-        else{
-           let e = await RequestCadastroFreelancer(cadastroFinal)
-            if(e.data.error){
-                setErr(e)
-            }
-        }
+
+        setCounter(6)
     };
 
     function handleSubmitCadFinal(infos){
-        switch(user_type){
-            case "deficiente":
-                return setCadastroFinal({
-                    usuario: { ...cadastroPcDLogin },
-                    endereco:{
-                        pais: infos.pais,
-                        estado: infos.estado,
-                        cidade: infos.cidade,
-                        bairro: infos.bairro,
-                        cep: infos.cep,
-                        logradouro: infos.logradouro,
-                        numero: infos.numero,
-                        complemento: infos.complemento
-                    },
-                    usuario_pcd:{ ...cadastroPcD }
-                });
-                cadastro();
-            case "empresa":
-                return setCadastroFinal({
-                    usuario: { ...cadastroEmpresaLogin },
-                    endereco:{
-                        pais: infos.pais,
-                        estado: infos.estado,
-                        cidade: infos.cidade,
-                        bairro: infos.bairro,
-                        cep: infos.cep,
-                        logradouro: infos.logradouro,
-                        numero: infos.numero,
-                        complemento: infos.complemento
-                    },
-                    usuario_empresa:{ ...cadastroEmpresa }
-                });
-                cadastro()
-            case "freelancer":
-                return setCadastroFinal({
-                    usuario: { ...cadastroFreelancerLogin },
-                    endereco:{
-                        pais: infos.pais,
-                        estado: infos.estado,
-                        cidade: infos.cidade,
-                        bairro: infos.bairro,
-                        cep: infos.cep,
-                        logradouro: infos.logradouro,
-                        numero: infos.numero,
-                        complemento: infos.complemento
-                    },
-                    usuario_freelancer:{ ...cadastroFreelancer }
-                });
-                cadastro()
-            default:
-        }  
+        setEndereco({
+            endereco:{
+                pais: infos.pais,
+                estado: infos.estado,
+                cidade: infos.cidade,
+                bairro: infos.bairro,
+                cep: infos.cep,
+                logradouro: infos.logradouro,
+                numero: infos.numero,
+                complemento: infos.complemento
+            }
+        });
+        cadastro();  
     };
+
+    function answerResponse(answer){
+        if(answer){
+            setErr('')
+            if ( answer.data.error === "Usuario ja existe." ){
+                setCounter(1)
+                setErr("Usuario já existe!")
+            } else if("Email ja esta em uso.") {
+                setCounter(1)
+                setErr("Email já está em uso!")
+            }
+        }
+    }
 
     function voltarComponent(){
         let back = counter - 1;
@@ -187,27 +170,41 @@ const Cadastro = () =>{
         setCounter(back);
     };
 
+    function voltarComponentAdress(){
+        let back;
+        if ( user_type === "deficiente") {
+            back = counter - 3
+        }
+        else if ( user_type === "empresa") {
+            back = counter - 2
+        }else{
+            back = counter - 1
+        }
+        setCounter(back)
+    }
+
     function changeRender(){
         switch(counter){
             case 0:
-                return <SelectUser onClick={changeCounter} />;
+                return <SelectUser onClick={ changeCounter } />;
             case 1:
-                return <UserBasicForm onSubmit={handleSubmit} user_type={user_type} voltarComponent={voltarComponent}/>
+                return <UserBasicForm onSubmit={ handleSubmit } user_type={ user_type } voltarComponent={ voltarComponent } history={ history } error={ error }/>
 
             case 2:
-                return <PersonalInfosFormPcD onSubmit={handleSubmitCadPcD} voltarComponent={voltarComponent} />
+                return <PersonalInfosFormPcD onSubmit={ handleSubmitCadPcD } voltarComponent={ voltarComponent } history={ history } />
 
             case 3:
-                return <CompanyInfosForm onSubmit={handleSubmitCadEmpresa} voltarComponent={voltarComponentEmpresa} />
+                return <CompanyInfosForm onSubmit={ handleSubmitCadEmpresa } voltarComponent={ voltarComponentEmpresa } history={ history } />
 
             case 4:
-               return <FreelancerInfosForm onSubmit={handleSubmitCadFreelancer} voltarComponent={voltarComponentFreelancer} />
+               return <FreelancerInfosForm onSubmit={ handleSubmitCadFreelancer } voltarComponent={ voltarComponentFreelancer } history={ history } />
 
             case 5:
-                return <AddressFomr onSubmit={handleSubmitCadFinal} voltarComponent={voltarComponentFreelancer} />
-
+                return <AddressFomr onSubmit={ handleSubmitCadFinal } voltarComponent={ voltarComponentAdress } history={ history } />
+            case 6:
+                return <Loading dadosFinais={ dadosFinais } answerResponse={ answerResponse } endereco={ endereco } usertype={ user_type } history={ history }/>
             default:
-                return <SelectUser onClick={changeCounter} />;
+                return <SelectUser onClick={ changeCounter } />;
         }
     };
 

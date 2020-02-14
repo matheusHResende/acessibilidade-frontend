@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
-import '../assets/css/PersonalInfosForm.css'
+import { Main, Form, Title, Header, Logo, Login, InputGroup, DuoInputGroup, HeaderButtonGroup, Error, Button, BackButton } from '../assets/css/CadForms';
+import ReturnRG from '../assets/const/ReturnRG'
 
-const LoginInfos = ({ onSubmit, voltarComponent }) => {
+const LoginInfos = ({ onSubmit, history, voltarComponent }) => {
     useEffect(() => document.querySelector('input[name="rg"]').focus(), [])
     
     const [ rg, setRg ] = useState('');
     const [ dt_nascimento, setData ] = useState('');
     const [ deficiencia, setDeficiencia ] = useState('');
-    const [ telefone_fixo, setTelefoneFixo ] = useState(0);
-    const [ telefone_celular, setTelefoneCelular ] = useState(0);
-    const [ laudo_url ] = useState('batta');
+    const [ telefone_fixo, setTelefoneFixo ] = useState('');
+    const [ telefone_celular, setTelefoneCelular ] = useState('');
+    const [ laudo_url ] = useState('');
     const [id_tipo_deficiencia, setTipoDeficienia] = useState(1);
     const [ erro, setErro ] = useState('');
 
@@ -69,63 +70,157 @@ const LoginInfos = ({ onSubmit, voltarComponent }) => {
          }
     }
 
+    function conferirRg(rg){
+        const reformedRG = rg.replace('.','').replace('.','').replace('-','')
+        setRg(ReturnRG(reformedRG))
+    }
+
+    useEffect(() => {
+        const rg = document.getElementById('rg')
+        rg.value.indexOf('.') >= 0 ? rg.maxLength = 12 : rg.maxLength = 9
+    },[rg])
+
     return(
-        <main>
-            <form onSubmit={enviarDados}>
-                <h1>Informações pessoais</h1>
+        <Main>
 
-                <span className="error" id="error">{erro}</span>
+            <Header>
+                <Logo />
 
-                <label htmlFor="rg">RG <sup>*</sup></label>
-                <input type="text" name="rg" id="rg" value={rg} onChange={e => setRg(e.target.value)} />
+                <HeaderButtonGroup>
+                    <Login onClick={() => history.push('/login')}>
+                        Entrar
+                    </Login>
+                </HeaderButtonGroup>
+            </Header>
+                
+            <Title>
+                Informações pessoais
+            </Title>
+            
+            <Form onSubmit={enviarDados}>
 
-                <div className="selectGroup">
-                    <div className="selectGroupComponent">
-                        <label htmlFor="dt_nascimento">Data de Nascimento <sup>*</sup></label>
-                        <input type="date" name="dt_nascimento" id="dt_nascimento" value={dt_nascimento} onChange={e => setData(e.target.value)} />
-                    </div>
+                <Error id="error">
+                    { erro }
+                </Error>
+
+                <InputGroup>
+                    <label htmlFor="rg">
+                        RG <span>(Apenas números)</span><sup>*</sup>
+                    </label>
                     
-                    <div className="selectGroupComponent">
-                        <label htmlFor="deficiencias">Qual sua deficiência? <sup>*</sup></label>   
-                        <select id="deficiencias" name="deficiencias" onChange={e => setDeficiencia(e.target.value)}>
-                            <option value="visual" defaultValue>Deficiências</option>
-                            <option value="visual" >Visual</option>
-                            <option value="auditiva">Auditiva</option>
-                            <option value="fisica">Física</option>
-                            <option value="mental">Mental</option>
-                            <option value="multipla">Múltipla</option>
-                        </select>
-                    </div>
-                </div>
+                    <input 
+                        type="text" 
+                        name="rg" 
+                        id="rg" 
+                        value={rg} 
+                        onPaste={e => e.target.maxLength = 12}
+                        onBlur={e => e.target.value === '' ? '' : conferirRg(e.target.value)}
+                        onChange={e => setRg(e.target.value)} 
+                    />
+                            
+                </InputGroup>
+                
+                <InputGroup>
+                    <label htmlFor="dt_nascimento">
+                        Data de Nascimento <sup>*</sup>
+                    </label>
+                    
+                    <input 
+                        type="date" 
+                        name="dt_nascimento" 
+                        id="dt_nascimento" 
+                        value={dt_nascimento} 
+                        onChange={e => setData(e.target.value)} 
+                    />
+                </InputGroup>
+                    
+                <InputGroup>
+                    <label htmlFor="deficiencias">
+                        Qual sua deficiência? <sup>*</sup>
+                    </label>   
+                    
+                    <select 
+                        id="deficiencias" 
+                        name="deficiencias" 
+                        onChange={e => setDeficiencia(e.target.value)}
+                    >
+                        <option value="visual" defaultValue >
+                            Deficiências
+                        </option>
+                        
+                        <option value="visual" >
+                            Visual
+                        </option>
+                        
+                        <option value="auditiva" >
+                            Auditiva
+                        </option>
+                        
+                        <option value="fisica" >
+                            Física
+                        </option>
+                        
+                        <option value="mental" >
+                            Mental
+                        </option>
+                        
+                        <option value="multipla" >
+                            Múltipla
+                        </option>
+                    </select>
+                </InputGroup>
 
-                <div className="passwordGroup">
-                    <div className="passwordGroupComponent">
-                        <label>Telefone Fixo</label>
+                <DuoInputGroup>
+                    <InputGroup>
+                        <label htmlFor="telefone_fixo">
+                            Telefone Fixo
+                        </label>
+                        
                         <input 
-                            type="tel" 
+                            type="text" 
                             name="telefone_fixo" 
+                            id="telefone_fixo"
                             maxLength={11}
                             onChange={e => setTelefoneFixo(e.target.value)} 
                         />
-                    </div>
+                    </InputGroup>
 
-                    <div className="passwordGroupComponent">
-                        <label>Telefone Celular</label>
+                    <InputGroup>
+                        <label htmlFor="telefone_celular">
+                            Telefone Celular
+                        </label>
+                        
                         <input 
-                            type="tel" 
+                            type="text" 
                             name="telefone_celular" 
+                            id="telefone_celular"
                             maxLength={11}
                             onChange={e => setTelefoneCelular(e.target.value)} 
                         />
-                    </div>
-                </div>
+                    </InputGroup>
+                </DuoInputGroup>
 
-                <div className="buttonGroup">
-                    <button type="button" name="voltar" onClick={voltarComponent}>Voltar</button>
-                    <button type="submit" name="avançar">Próximo</button>
-                </div>
-            </form>
-        </main>
+                <Button 
+                    type="submit" 
+                    name="avançar"
+                >
+                    Próximo
+                </Button>
+            </Form>
+
+            
+
+            <BackButton
+                type="button"
+                name="voltar"
+                id="voltar"
+                onClick={voltarComponent}
+            >
+                <i className="material-icons">
+                    arrow_back
+                </i>
+            </BackButton>
+        </Main>
     )
 }
 

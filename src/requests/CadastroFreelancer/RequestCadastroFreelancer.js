@@ -1,16 +1,25 @@
-import React from 'react';
-import { Redirect } from 'react-router-dom';
-
 import api from '../../lib/assets/const/api.js';
-import Authentication from '../../services/Authentication';
 
-export default async function RequestcadastroFreelancer(cadastroFinal){
-    const response = await api.post('/freelancer', cadastroFinal);
-    console.log(response);
+export default async function RequestCadastroPcD(cadastroFinal, { history }) {
+    let result;
     
-    if(response.statusText === "Created"){
-        localStorage.setItem('key', response.data.token);
-        localStorage.setItem('dados', JSON.stringify(response.data.usuario));
-        return !Authentication()? <Redirect to={{pathname: '/feedfreelancer'}} /> : <Redirect to={{pathname: '/cadastro'}} />
+    await api.post('/freelancer', cadastroFinal)
+        .then(res => {
+            result = res
+        })
+        .catch(error => {
+            result = error.response
+            if(error.response.status === 423){
+            }
+        })
+    
+    const { status, statusText } = result;
+
+    if( status === 201 && statusText === "Created" ){
+        localStorage.setItem('key', result.data.token);
+        localStorage.setItem('dados', JSON.stringify(result.data.usuario));
+        window.location.href = "/login"
+    }else{
+        return result  
     }
 }

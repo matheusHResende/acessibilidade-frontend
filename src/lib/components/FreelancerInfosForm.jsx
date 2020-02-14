@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 
-import '../assets/css/PersonalInfosForm.css'
+import { Main, Form, Title, Header, Logo, Login, InputGroup, DuoInputGroup, HeaderButtonGroup, Error, Button, BackButton } from '../assets/css/CadForms';
+import ReturnCPF from '../assets/const/ReturnCPF';
 
-const LoginInfos = ({ onSubmit, voltarComponent }) => {
+const LoginInfos = ({ onSubmit, voltarComponent, history }) => {
     useEffect(() => document.querySelector('input[name="dt_nascimento"]').focus(), [])
 
     const [ cpf, setCpf ] = useState('');
     const [ dt_nascimento, setData ] = useState('');
+    const [ especialidade, setEspecialidade ] = useState('');
     const [ telefone_fixo, setTelefoneFixo ] = useState(0);
     const [ telefone_celular, setTelefoneCelular ] = useState(0);
     const [ erro, setErro ] = useState('');
+
 
     const setDisplay = document.getElementById('error');
 
@@ -20,7 +23,8 @@ const LoginInfos = ({ onSubmit, voltarComponent }) => {
             cpf,
             telefone_fixo,
             telefone_celular,
-            dt_nascimento
+            dt_nascimento,
+            especialidade
          }
 
          if(usuario_freelancer.cpf === ''){
@@ -32,52 +36,143 @@ const LoginInfos = ({ onSubmit, voltarComponent }) => {
              setDisplay.style.display = "block"
              setErro('Por favor preencha sua data de nascimento!');
              document.querySelector('input[name="dt_nascimento"]').focus()
-         }else{
+         }
+         else if(usuario_freelancer.especialidade === ''){
+            setDisplay.style.display = "block"
+            setErro('Por favor preencha sua data de nascimento!');
+            document.querySelector('input[name="dt_nascimento"]').focus()
+        }else{
             onSubmit(usuario_freelancer)
          }
     }
 
+    function conferirCpf(cpf){
+        const reformedCPF = cpf.replace('.','').replace('.','').replace('.','').replace('/','').replace('-','').trim()
+        setCpf(ReturnCPF(reformedCPF))
+    }
+
+    useEffect(() => {
+        const cpf = document.getElementById('cpf')
+        cpf.value.indexOf('.') >= 0 ? cpf.maxLength = 14 : cpf.maxLength = 11
+    },[cpf])
+
     return(
-        <main>
-            <form onSubmit={enviarDados}>
-                <h1>Informações</h1>
+        <Main>
 
-                <span className="error" id="error">{erro}</span>
+            <Header>
+                <Logo />
 
-                <label htmlFor="dt_nascimento">Data de Nascimento <sup>*</sup></label>
-                <input type="date" name="dt_nascimento" id="dt_nascimento" value={dt_nascimento} onChange={e => setData(e.target.value)} />
+                <HeaderButtonGroup>
+                    <Login onClick={() => history.push('/login')}>
+                        Entrar
+                    </Login>
+                </HeaderButtonGroup>
+            </Header>
+                
+            <Title>
+                Informações pessoais
+            </Title>
+            
+            <Form onSubmit={enviarDados}>
+
+                <Error id="error">
+                    { erro }
+                </Error>
+
+                <DuoInputGroup>
+                    <InputGroup>
+                        <label htmlFor="dt_nascimento">
+                            Data de Nascimento <sup>*</sup>
+                        </label>
                     
-                <label htmlFor="cpf">CPF <sup>*</sup></label>
-                <input type="text" name="cpf" id="cpf" value={cpf} onChange={e => setCpf(e.target.value)} />
+                        <input 
+                            type="date" 
+                            name="dt_nascimento" 
+                            id="dt_nascimento" 
+                            value={dt_nascimento} 
+                            onChange={e => setData(e.target.value)} 
+                        />
+                    </InputGroup>    
 
-                <div className="passwordGroup">
-                    <div className="passwordGroupComponent">
-                        <label>Telefone Fixo</label>
+                    <InputGroup>
+                        <label htmlFor="cpf">
+                            CPF <sup>*</sup>
+                        </label>
+                        <input 
+                            type="text" 
+                            name="cpf" 
+                            id="cpf" 
+                            value={cpf}
+                            onPaste={e => e.target.maxLength = 14} 
+                            onChange={e => setCpf(e.target.value)} 
+                            onBlur={e => e.target.value === '' ? '' : conferirCpf(e.target.value)}
+                        />
+                    </InputGroup>
+                </DuoInputGroup>
+
+                <InputGroup>
+                    <label htmlFor="especialidade">
+                        Especialidades
+                    </label>
+
+                    <input 
+                        type="text"
+                        name="especialidade"
+                        id="especialidade"
+                        value={especialidade}
+                        onChange={ e => setEspecialidade(e.target.value)}
+                    />
+                </InputGroup>
+
+                <DuoInputGroup>
+                    <InputGroup>
+                        <label htmlFor="telefone_fixo">
+                            Telefone Fixo
+                        </label>
+                        
                         <input 
                             type="tel" 
                             name="telefone_fixo" 
+                            id="telefone_fixo"
                             maxLength={11}
                             onChange={e => setTelefoneFixo(e.target.value)} 
                         />
-                    </div>
+                    </InputGroup>
 
-                    <div className="passwordGroupComponent">
-                        <label>Telefone Celular</label>
+                    <InputGroup>
+                        <label htmlFor="telefone_celular" >
+                            Telefone Celular
+                        </label>
+                        
                         <input 
                             type="tel" 
                             name="telefone_celular" 
+                            id="telefone_celular" 
                             maxLength={11}
                             onChange={e => setTelefoneCelular(e.target.value)} 
                         />
-                    </div>
-                </div>
+                    </InputGroup>
+                </DuoInputGroup>
+                    
+                <Button 
+                    type="submit" 
+                    name="avançar"
+                >
+                    Próximo
+                </Button>
+            </Form>
 
-                <div className="buttonGroup">
-                    <button type="button" name="voltar" onClick={voltarComponent}>Voltar</button>
-                    <button type="submit" name="avançar">Próximo</button>
-                </div>
-            </form>
-        </main>
+            <BackButton
+                type="button"
+                name="voltar"
+                id="voltar"
+                onClick={voltarComponent}
+            >
+                <i className="material-icons">
+                    arrow_back
+                </i>
+            </BackButton>
+        </Main>
     )
 }
 
